@@ -17,11 +17,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import questionViewVue from '../components/questionView.vue';
-import { questionsArr } from '../data/data.js';
-import questionView from '../components/questionView.vue';
 import { useRouter } from 'vue-router';
-
 import image1 from '../assets/image1.jpg';
 import image2 from '../assets/image2.jpg';
 import image3 from '../assets/image3.jpg';
@@ -38,7 +34,7 @@ const fullText = "Feliz cumple gordi";
 
 const startQuiz = () => {
   // Redirigir al usuario a la primera pregunta del cuestionario
-  router.push({ name: 'questionView', params: { id: 1 } });
+  router.push({ path: '/question/1', replace: true });
 }
 
 const typeWriter = () => {
@@ -59,11 +55,8 @@ const typeWriter = () => {
 onMounted(() => {
   typeWriter(); // Iniciar el efecto de máquina de escribir cuando el componente se monta
 });
-
-const questions = ref(questionsArr);
-console.log('q', questions.value)
-console.log('sl', slides.value)
 </script>
+
 
 <style lang="scss" scoped>
     .hiText{
