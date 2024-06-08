@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import triviaGift from '../views/triviaGift.vue';
 import questionView from '../components/questionView.vue';
+import endTrivia from '../views/endTrivia.vue';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/question/:id',
     name: 'questionView',
     component: questionView
+  },
+  {
+    path: '/endTrivia',
+    name: 'endTrivia',
+    component: endTrivia
   }
 ];
 
