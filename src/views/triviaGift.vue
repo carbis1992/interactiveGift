@@ -19,7 +19,6 @@
 import { ref, onMounted } from 'vue';
 import questionViewVue from '../components/questionView.vue';
 import { questionsArr } from '../data/data.js';
-import { slidesData } from '../data/slides.js';
 import questionView from '../components/questionView.vue';
 import { useRouter } from 'vue-router';
 
