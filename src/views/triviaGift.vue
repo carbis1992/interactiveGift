@@ -23,8 +23,16 @@ import { slidesData } from '../data/slides.js';
 import questionView from '../components/questionView.vue';
 import { useRouter } from 'vue-router';
 
+import image1 from '../assets/image1.jpg';
+import image2 from '../assets/image2.jpg';
+import image3 from '../assets/image3.jpg';
+
 const router = useRouter();
-const slides = ref(slidesData);
+const slides = [
+    { src: image1 },
+    { src: image2 },
+    { src: image3 }
+];
 
 const typedText = ref('');
 const fullText = "Feliz cumple gordi";
