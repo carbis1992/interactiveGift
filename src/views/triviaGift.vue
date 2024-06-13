@@ -21,35 +21,15 @@ import image3 from '../assets/image3.jpeg';
 const router = useRouter();
 const slides = [
   { src: image1 },
-  // { src: image2 },
-  // { src: image3 }
+  { src: image2 },
+  { src: image3 },
 ];
 
-// const typedText = ref('');
 const fullText = "Feliz cumple gordi";
 
 const startQuiz = () => {
   router.push({ name: 'questionView', params: { id: '1' } });
 }
-
-// const typeWriter = () => {
-//   let index = 0;
-//   const intervalId = setInterval(() => {
-//     typedText.value += fullText[index];
-//     index++;
-//     if (index === fullText.length) {
-//       clearInterval(intervalId);
-//       setTimeout(() => {
-//         typedText.value = ''; // Reiniciar el texto
-//         typeWriter(); // Llamar a typeWriter nuevamente para iniciar otro ciclo
-//       }, 2000);
-//     }
-//   }, 100);
-// }
-
-// onMounted(() => {
-//   typeWriter();
-// });
 
 </script>
 

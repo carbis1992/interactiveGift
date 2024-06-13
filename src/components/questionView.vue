@@ -1,19 +1,50 @@
 <template>
   <div :style="backgroundStyle" class="wrapper-trivia" v-if="routeId !== '9'">
-    <div v-if="!showModal" class="text-center justify-center d-flex flex-column">
-      <h2 class="qTitle pt-10">{{ question }}</h2>
-      <v-card class="options-wrapper" variant="plain">
+    <div v-if="!showModal && routeId === '2'" class="text-center justify-center d-flex flex-column" style="height: 100%;">
+      <h2 class="qTitle titleTop pt-10">{{ question }}</h2>
+      <v-card class="options-wrapper qBottom" variant="plain">
         <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
           <div v-for="(option, index) in options" :key="index">
-            <v-btn @click="checkAnswer(option)" color="teal-lighten-4">{{ option }}</v-btn>
+            <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
           </div>
         </v-card-text>
       </v-card>
     </div>
+    <div v-else-if="!showModal && routeId === '3' || routeId === '6'" class="text-center justify-center d-flex flex-column">
+      <h2 class="qTitle pt-5">{{ question }}</h2>
+      <v-card class="options-wrapper" variant="plain" style="height: 28vh;">
+        <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
+          <div v-for="(option, index) in options" :key="index">
+            <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
+          </div>
+        </v-card-text>
+      </v-card>
+    </div>
+    <div v-else-if="!showModal && routeId === '7'" class="text-center justify-center d-flex flex-column" style="position: absolute; bottom: 2%;">
+      <h2 class="qTitle pt-5" style="font-size: 16px;">{{ question }}</h2>
+      <v-card class="options-wrapper" variant="plain" style="height: 25vh;">
+        <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
+          <div v-for="(option, index) in options" :key="index">
+            <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
+          </div>
+        </v-card-text>
+      </v-card>
+    </div>
+    <div v-else-if="!showModal" class="text-center justify-center d-flex flex-column">
+      <h2 class="qTitle pt-10">{{ question }}</h2>
+      <v-card class="options-wrapper" variant="plain">
+        <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
+          <div v-for="(option, index) in options" :key="index">
+            <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
+          </div>
+        </v-card-text>
+      </v-card>
+    </div>
+  </div>
     <div v-if="showModal" class="modal mx-auto">
       <v-card color="red-lighten-1">
         <v-card-text>
-          Incorrecto
+          Ups! Incorrecto... 
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -21,15 +52,12 @@
         </v-card-actions>
       </v-card>
     </div>
-  </div>
   <div class="text-center justify-center d-flex flex-column my-auto openQ" v-else>
-    <!-- <v-card variant="tonal" color="blue-grey-darken-4"> -->
     <div class="form-wrapper">
       <h2 class="pa-5">{{ questionData.intro }}</h2>
       <h2 class="pa-5">{{ questionData.question }}</h2>
-      <!-- </v-card> -->
-      <v-textarea label="Escribe aquí" variant="outlined" color="cyan" class="pa-5" rows="2" v-model="answer"></v-textarea>
-      <v-btn class="lastQ mb-7" @click="send()">Enviar</v-btn>
+      <v-textarea label="Escribe aquí" variant="outlined" color="cyan" class="pa-5" rows="1" v-model="answer"></v-textarea>
+      <v-btn class="lastQ mb-7" @click="send()" color="teal-lighten-1" variant="elevated">Enviar</v-btn>
     </div>
   </div>
 </template>
@@ -48,7 +76,16 @@ import foto7 from '../assets/foto7.jpeg';
 import foto8 from '../assets/foto8.jpeg';
 import foto9 from '../assets/foto9.jpeg';
 
-const fotos = [foto1, foto2, foto3, foto5, foto6, foto7, foto8, foto9];
+const backgroundImages = {
+  1: foto8,
+  2: foto2,
+  3: foto3,
+  4: foto9,
+  5: foto5,
+  6: foto6,
+  7: foto7,
+  8: foto1,
+};
 const router = useRouter();
 const route = useRoute();
 const emit = defineEmits(['correct', 'incorrect']);
@@ -63,29 +100,23 @@ const selectedOption = ref('');
 const showModal = ref(false);
 const next = ref(false);
 const answer = ref('');
-const backgroundImage = ref('');
 
-const setRandomBackground = () => {
-  const randomIndex = Math.floor(Math.random() * fotos.length);
-  backgroundImage.value = fotos[randomIndex];
-}
+const backgroundImage = computed(() => backgroundImages[routeId.value]);
 
 const backgroundStyle = computed(() => ({
   backgroundImage: `url(${backgroundImage.value})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
+  height: '100vh',
   width: '100%',
 }));
 
-onMounted(() => {
-  setRandomBackground();
-});
-
 const send = () => {
-  if (answer.value.includes('buceo')) {
+  const res = answer.value.toLowerCase();
+  if (res.includes('buceo') || res.includes('buceando')) {
     router.push({ name: 'endTrivia', replace: true });
   } else {
-    alert('incorrecto!');
+   showModal.value = true;
   }
 }
 
@@ -113,10 +144,8 @@ watch(() => route.params.id, (newId) => {
   options.value = questionData.value.options;
   correctAnswer.value = questionData.value.correctAnswer;
   selectedOption.value = '';
-  setRandomBackground();
 });
 
-// setRandomBackground();
 </script>
 
 <style lang="scss" scoped>
@@ -156,6 +185,9 @@ watch(() => route.params.id, (newId) => {
 
 .modal {
   width: 80%;
+  position: fixed;
+  top: 30%;
+  left: 10%;
 }
 
 .openQ {
@@ -180,7 +212,6 @@ watch(() => route.params.id, (newId) => {
 }
 
 .form-wrapper{
-  // width: 95%;
   background-color: rgb(95 158 160 / 69%);
   margin-right: auto;
   margin-left: auto;
@@ -190,5 +221,15 @@ watch(() => route.params.id, (newId) => {
   width: 90%;
   margin-right: auto;
   margin-left: auto;
+}
+.qBottom{
+      position: absolute;
+    bottom: 10%;
+}
+
+.titleTop{
+  top: 0;
+  position: absolute;
+  width: 95%;
 }
 </style>

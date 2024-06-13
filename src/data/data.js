@@ -3,8 +3,8 @@ export const questionsArr = [
   {
     id: '1',
     question: '¿Cuando fue nuestro primer beso?',
-    options: ['28/09/2012', '8/7/2012', '22/07/24'],
-    correctAnswer: '8/7/2012'
+    options: ['28/09/2012', '08/07/2012', '22/07/24'],
+    correctAnswer: '08/07/2012'
   },
   {
     id: '2',
