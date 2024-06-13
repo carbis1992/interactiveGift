@@ -10,19 +10,9 @@
         </v-card-text>
       </v-card>
     </div>
-    <div v-else-if="!showModal && routeId === '3' || routeId === '6'" class="text-center justify-center d-flex flex-column">
+    <div v-else-if="!showModal && routeId === '3' || routeId === '6' || routeId === '7'" class="text-center justify-center d-flex flex-column">
       <h2 class="qTitle pt-5">{{ question }}</h2>
       <v-card class="options-wrapper" variant="plain" style="height: 26vh;">
-        <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
-          <div v-for="(option, index) in options" :key="index">
-            <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
-          </div>
-        </v-card-text>
-      </v-card>
-    </div>
-    <div v-else-if="!showModal && routeId === '7'" class="text-center justify-center d-flex flex-column" style="position: absolute; bottom: 2%;">
-      <h2 class="qTitle pt-5" style="font-size: 16px;">{{ question }}</h2>
-      <v-card class="options-wrapper" variant="plain" style="height: 24vh;">
         <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
           <div v-for="(option, index) in options" :key="index">
             <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
@@ -72,7 +62,7 @@ import foto3 from '../assets/foto3.jpeg';
 import foto4 from '../assets/foto4.jpeg';
 import foto5 from '../assets/foto5.jpeg';
 import foto6 from '../assets/foto6.jpeg';
-import foto7 from '../assets/foto7.jpeg';
+import foto10 from '../assets/foto10.jpeg';
 import foto8 from '../assets/foto8.jpeg';
 import foto9 from '../assets/foto9.jpeg';
 
@@ -83,7 +73,7 @@ const backgroundImages = {
   4: foto9,
   5: foto5,
   6: foto6,
-  7: foto7,
+  7: foto10,
   8: foto1,
 };
 const router = useRouter();
