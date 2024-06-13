@@ -12,7 +12,7 @@
     </div>
     <div v-else-if="!showModal && routeId === '3' || routeId === '6'" class="text-center justify-center d-flex flex-column">
       <h2 class="qTitle pt-5">{{ question }}</h2>
-      <v-card class="options-wrapper" variant="plain" style="height: 28vh;">
+      <v-card class="options-wrapper" variant="plain" style="height: 26vh;">
         <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
           <div v-for="(option, index) in options" :key="index">
             <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
@@ -22,7 +22,7 @@
     </div>
     <div v-else-if="!showModal && routeId === '7'" class="text-center justify-center d-flex flex-column" style="position: absolute; bottom: 2%;">
       <h2 class="qTitle pt-5" style="font-size: 16px;">{{ question }}</h2>
-      <v-card class="options-wrapper" variant="plain" style="height: 25vh;">
+      <v-card class="options-wrapper" variant="plain" style="height: 24vh;">
         <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
           <div v-for="(option, index) in options" :key="index">
             <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
@@ -52,7 +52,7 @@
         </v-card-actions>
       </v-card>
     </div>
-  <div class="text-center justify-center d-flex flex-column my-auto openQ" v-else>
+  <div class="text-center justify-center d-flex flex-column my-auto openQ" v-else-if="routeId === '9'">
     <div class="form-wrapper">
       <h2 class="pa-5">{{ questionData.intro }}</h2>
       <h2 class="pa-5">{{ questionData.question }}</h2>
@@ -174,7 +174,7 @@ watch(() => route.params.id, (newId) => {
 
 .options-wrapper {
   width: 100%;
-  height: 30vh;
+  height: 28vh;
 }
 
 .card-text {
