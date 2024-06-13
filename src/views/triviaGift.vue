@@ -46,7 +46,7 @@ const startQuiz = () => {
 
 .btn-start{
   position: absolute;
-  bottom: 30px;
+  bottom: 115px;
   align-self: center;
   background-color: rgb(95 158 160 / 69%);
   color: #fff;

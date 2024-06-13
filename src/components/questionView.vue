@@ -12,7 +12,7 @@
     </div>
     <div v-else-if="!showModal && routeId === '3' || routeId === '6' || routeId === '7'" class="text-center justify-center d-flex flex-column">
       <h2 class="qTitle pt-5">{{ question }}</h2>
-      <v-card class="options-wrapper" variant="plain" style="height: 26vh;">
+      <v-card class="options-wrapper" variant="plain" style="height: 24vh;">
         <v-card-text class="d-flex text-center justify-space-around flex-column card-text">
           <div v-for="(option, index) in options" :key="index">
             <v-btn @click="checkAnswer(option)" color="teal-lighten-4" variant="elevated">{{ option }}</v-btn>
@@ -213,8 +213,8 @@ watch(() => route.params.id, (newId) => {
   margin-left: auto;
 }
 .qBottom{
-      position: absolute;
-    bottom: 10%;
+  position: absolute;
+  bottom: 9%;
 }
 
 .titleTop{
