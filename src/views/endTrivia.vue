@@ -50,7 +50,7 @@ confetti({
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin-top: 77%;
+  margin-top: 76%;
   margin-left: 5%;
   position: relative;
   z-index: 1;
